@@ -41,6 +41,7 @@ public class SpeakingSnailServiceImplTest {
 
         // 入力値の設定
         InputDto inputDto = new InputDto();
+        inputDto.setSpeakContent("test");
 
         Mockito.when(speakingSnailLogic.callSnail(any())).thenReturn(outputDto);
 
@@ -57,6 +58,34 @@ public class SpeakingSnailServiceImplTest {
         assertEquals(result.getBubbleSpeakContent()[0], "a");
         assertEquals(result.getBubbleSpeakContent()[1], "b");
         assertEquals(result.getBubbleSpeakContent()[2], "c");
+    }
+
+    /**
+     * callSnailのテスト inputが空だった場合に入力値に適切な文字列が入ること
+     * 
+     */
+    @Test
+    public void testCallSnail_empty_input() {
+
+        // 返却値の設定
+        OutputDto outputDto = new OutputDto();
+        String[] bubbleSpeakContent = { "a", "b", "c" };
+        outputDto.setBubbleSpeakContent(bubbleSpeakContent);
+
+        // 入力値の設定
+        InputDto inputDto = new InputDto();
+        inputDto.setSpeakContent("");
+
+        Mockito.when(speakingSnailLogic.callSnail(any())).thenReturn(outputDto);
+
+        try {
+            speakingSnailService.callSnail(inputDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        assertEquals(inputDto.getSpeakContent(), "なんか書いてよ！");
     }
 
 }

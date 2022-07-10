@@ -25,6 +25,11 @@ public class SpeakingSnailServiceImpl implements SpeakingSnailService {
     @Override
     public OutputDto callSnail(InputDto inputDto) {
 
+        // 入力が空だった場合に特殊処理
+        if (inputDto.getSpeakContent().equals("")) {
+            inputDto.setSpeakContent("なんか書いてよ！");
+        }
+
         // ロジック呼び出し
         OutputDto outputDto = speakingSnailLogic.callSnail(inputDto);
 
