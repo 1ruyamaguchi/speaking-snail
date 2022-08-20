@@ -1,1 +1,8 @@
-# WIP
+version: "3.3"
+services:
+  java:
+    image: speaking-snail
+    container_name: speaking-snail
+    ports:
+      - 8080:8080
+    tty: true
