@@ -34,7 +34,7 @@ public class SpeakingSnailController {
     @RequestMapping(value = "/input")
     public String welcome() {
 
-        return "page/speakingSnail";
+        return "page/inout";
     }
 
     /**
@@ -51,7 +51,7 @@ public class SpeakingSnailController {
         // 返却値をモデルに格納
         model.addAttribute("outputDto", outputDto);
 
-        return "page/speakingSnail";
+        return "page/inout";
     }
 
 }
