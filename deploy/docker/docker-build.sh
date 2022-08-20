@@ -1,1 +1,2 @@
-docker build -t speaking-snail .
+IMAGE_NAME="speaking-snail"
+docker build -t ${IMAGE_NAME} .
