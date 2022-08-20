@@ -1,6 +1,9 @@
 package com.example.speakingsnail.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
@@ -10,6 +13,8 @@ import com.example.speakingsnail.dto.OutputDto;
  * 
  */
 @Service
+@RestController
+@RequestMapping(value = "/v1/api/snail")
 public interface SpeakingSnailService {
 
     /**
@@ -19,6 +24,7 @@ public interface SpeakingSnailService {
      * @param outputDto
      * @return
      */
+    @GetMapping(value = "/call")
     OutputDto callSnail(InputDto inputDto);
 
 }
