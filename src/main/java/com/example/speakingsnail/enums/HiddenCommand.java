@@ -7,7 +7,10 @@ package com.example.speakingsnail.enums;
 public enum HiddenCommand {
 
     MINAMI("浜辺美波", "うちの奥さん"),
-    HIGUCHI("樋口伸宏", "樋口伸宏大先輩");
+    NANA("森七菜", "うちの奥さん"),
+    HONOKA("松本穂香", "うちの奥さん"),
+    HIGUCHI("樋口伸宏", "樋口伸宏（大先輩）"),
+    KH("キングダムハーツ", "キングダムハーツ（神ゲー）");
 
     private final String before;
     private final String after;
