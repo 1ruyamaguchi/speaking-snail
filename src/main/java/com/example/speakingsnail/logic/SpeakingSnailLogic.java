@@ -21,4 +21,12 @@ public interface SpeakingSnailLogic {
      */
     OutputDto callSnail(InputDto inputDto);
 
+    /**
+     * 隠しコマンド（特定のワードを別ワードに置換）を処理するメソッド
+     * 
+     * @param speakContent
+     * @return
+     */
+    String resolveHiddenCommand(String speakContent);
+
 }

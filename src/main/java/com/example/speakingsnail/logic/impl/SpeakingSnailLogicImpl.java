@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
+import com.example.speakingsnail.enums.HiddenCommand;
 import com.example.speakingsnail.logic.SpeakingSnailLogic;
 
 /**
@@ -23,8 +24,14 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
     @Override
     public OutputDto callSnail(InputDto inputDto) {
 
+        // 入力値の取り出し
+        String speakSentence = inputDto.getSpeakContent();
+
+        // 隠しコマンド処理
+        speakSentence = this.resolveHiddenCommand(speakSentence);
+
         // 入力された文字を1文字ずつに分割
-        String[] speakContents = inputDto.getSpeakContent().split("");
+        String[] speakContents = speakSentence.split("");
 
         // 返却値を生成
         OutputDto outputDto = new OutputDto();
@@ -89,6 +96,24 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         }
 
         return bubbleMiddle;
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     */
+    @Override
+    public String resolveHiddenCommand(String speakContent) {
+
+        // enumから隠しコマンドを全件取得
+        HiddenCommand[] hiddenCommands = HiddenCommand.values();
+
+        // 入力値に各コマンドが含まれていれば差し替える
+        for (HiddenCommand hiddenCommand : hiddenCommands) {
+            speakContent = speakContent.replace(hiddenCommand.getBefore(), hiddenCommand.getAfter());
+        }
+
+        return speakContent;
     }
 
 }
