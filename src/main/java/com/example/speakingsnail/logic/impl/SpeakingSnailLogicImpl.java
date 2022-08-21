@@ -1,5 +1,8 @@
 package com.example.speakingsnail.logic.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.example.speakingsnail.dto.InputDto;
@@ -26,17 +29,17 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         // 返却値を生成
         OutputDto outputDto = new OutputDto();
         // しゃべる内容（吹き出し付き）を格納する
-        String[] bubbleSpeakContent = new String[speakContents.length + 2];
+        List<String> bubbleSpeakContent = new ArrayList<>();
 
         // 吹き出しの上側を生成
-        bubbleSpeakContent[0] = this.generateBubbleUpper();
+        bubbleSpeakContent.add(this.generateBubbleUpper());
         // 吹き出しのセリフ部分を生成
         String[] bubbleMiddle = this.generateBubbleMiddle(speakContents);
         for (int i = 1; i <= speakContents.length; i++) {
-            bubbleSpeakContent[i] = bubbleMiddle[i - 1];
+            bubbleSpeakContent.add(bubbleMiddle[i - 1]);
         }
         // 吹き出しの下側を生成
-        bubbleSpeakContent[bubbleSpeakContent.length - 1] = this.generateBubbleLower();
+        bubbleSpeakContent.add(this.generateBubbleLower());
 
         outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 

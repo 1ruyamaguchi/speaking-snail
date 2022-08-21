@@ -1,5 +1,6 @@
 package com.example.speakingsnail.logic;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -30,16 +31,23 @@ public class SpeakingSnailLogicImplTest {
         InputDto inputDto = new InputDto();
         inputDto.setSpeakContent("ジャスティス");
 
-        OutputDto outputDto = new OutputDto();
+        OutputDto result = new OutputDto();
 
         try {
-            outputDto = speakingSnailLogic.callSnail(inputDto);
+            result = speakingSnailLogic.callSnail(inputDto);
         } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
-        assertNotNull(outputDto);
+        assertEquals(result.getBubbleSpeakContent().get(0), "_人人_");
+        assertEquals(result.getBubbleSpeakContent().get(1), "> ジ <");
+        assertEquals(result.getBubbleSpeakContent().get(2), "> ャ <");
+        assertEquals(result.getBubbleSpeakContent().get(3), "> ス <");
+        assertEquals(result.getBubbleSpeakContent().get(4), "> テ <");
+        assertEquals(result.getBubbleSpeakContent().get(5), "> ィ <");
+        assertEquals(result.getBubbleSpeakContent().get(6), "> ス <");
+        assertEquals(result.getBubbleSpeakContent().get(7), "¯Y^Y¯");
     }
 
 }

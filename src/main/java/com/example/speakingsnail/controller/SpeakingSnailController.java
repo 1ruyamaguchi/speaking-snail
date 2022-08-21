@@ -44,6 +44,7 @@ public class SpeakingSnailController {
      * @param model
      * @return
      */
+    @RequestMapping(value = "/output")
     public String output(InputDto inputDto, Model model) {
 
         // サービス呼び出し

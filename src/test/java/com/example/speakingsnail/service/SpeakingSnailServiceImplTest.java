@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +39,10 @@ public class SpeakingSnailServiceImplTest {
 
         // 返却値の設定
         OutputDto outputDto = new OutputDto();
-        String[] bubbleSpeakContent = { "a", "b", "c" };
+        List<String> bubbleSpeakContent = new ArrayList<>();
+        bubbleSpeakContent.add("a");
+        bubbleSpeakContent.add("b");
+        bubbleSpeakContent.add("c");
         outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 
         // 入力値の設定
@@ -55,9 +61,9 @@ public class SpeakingSnailServiceImplTest {
             fail();
         }
 
-        assertEquals(result.getBubbleSpeakContent()[0], "a");
-        assertEquals(result.getBubbleSpeakContent()[1], "b");
-        assertEquals(result.getBubbleSpeakContent()[2], "c");
+        assertEquals(result.getBubbleSpeakContent().get(0), "a");
+        assertEquals(result.getBubbleSpeakContent().get(1), "b");
+        assertEquals(result.getBubbleSpeakContent().get(2), "c");
     }
 
     /**
@@ -69,7 +75,10 @@ public class SpeakingSnailServiceImplTest {
 
         // 返却値の設定
         OutputDto outputDto = new OutputDto();
-        String[] bubbleSpeakContent = { "a", "b", "c" };
+        List<String> bubbleSpeakContent = new ArrayList<>();
+        bubbleSpeakContent.add("a");
+        bubbleSpeakContent.add("b");
+        bubbleSpeakContent.add("c");
         outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 
         // 入力値の設定
