@@ -11,5 +11,4 @@ RUN mkdir -p ${jarFilePath}
 
 COPY ./jar/${jarFile} ${jarFilePath}
 
-# CMD tail -f /dev/null
 CMD java -jar ${JAR_FILE_PATH}/${JAR_FILE}
