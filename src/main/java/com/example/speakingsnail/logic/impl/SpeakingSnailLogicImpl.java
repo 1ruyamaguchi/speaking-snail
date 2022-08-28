@@ -1,8 +1,5 @@
 package com.example.speakingsnail.logic.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.example.speakingsnail.dto.InputDto;
@@ -30,27 +27,59 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         // 隠しコマンド処理
         speakSentence = this.resolveHiddenCommand(speakSentence);
 
-        // 入力された文字を1文字ずつに分割
-        String[] speakContents = speakSentence.split("");
-
         // 返却値を生成
         OutputDto outputDto = new OutputDto();
-        // しゃべる内容（吹き出し付き）を格納する
-        List<String> bubbleSpeakContent = new ArrayList<>();
+        // しゃべる内容（吹き出し付き）の宣言
+        String bubbleSpeakContent = "";
+
+        // 吹き出しの大きさを計算
+        int bubbleSize = this.getBubbleSize(speakSentence);
 
         // 吹き出しの上側を生成
-        bubbleSpeakContent.add(this.generateBubbleUpper());
+        bubbleSpeakContent = bubbleSpeakContent + this.generateBubbleUpper(bubbleSize);
         // 吹き出しのセリフ部分を生成
-        String[] bubbleMiddle = this.generateBubbleMiddle(speakContents);
-        for (int i = 1; i <= speakContents.length; i++) {
-            bubbleSpeakContent.add(bubbleMiddle[i - 1]);
-        }
+        bubbleSpeakContent = bubbleSpeakContent + "<br>" + this.generateBubbleMiddle(speakSentence);
         // 吹き出しの下側を生成
-        bubbleSpeakContent.add(this.generateBubbleLower());
+        bubbleSpeakContent = bubbleSpeakContent + "<br>" + this.generateBubbleLower(bubbleSize);
 
         outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 
         return outputDto;
+    }
+
+    /**
+     * 吹き出しの大きさを計算する
+     * 
+     * @param speakSentence
+     * @return
+     */
+    private int getBubbleSize(String speakSentence) {
+
+        String[] speakSentenceChar = speakSentence.split("");
+
+        // 文字列のサイズ
+        int contentSize = 0;
+
+        // 1文字ごとに、全角ならサイズを2, 半角ならサイズを1として処理
+        for (String nowChar : speakSentenceChar) {
+            if (nowChar.getBytes().length > 1) {
+                contentSize = contentSize + 2;
+            } else {
+                contentSize++;
+            }
+        }
+
+        // 吹き出しのサイズ
+        int bubbleSize = 0;
+
+        // 文字列のサイズの半分を吹き出しのサイズとする 割り切れなければ切り上げ
+        if (contentSize % 2 != 0) {
+            bubbleSize = (contentSize + 1) / 2;
+        } else {
+            bubbleSize = contentSize / 2;
+        }
+
+        return bubbleSize;
     }
 
     /**
@@ -59,9 +88,15 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * @param contentByte
      * @return
      */
-    private String generateBubbleUpper() {
+    private String generateBubbleUpper(int bubbleSize) {
 
-        String bubbleUpper = "_人人_";
+        String bubbleUpper = "＿人";
+
+        for (int i = 0; i < bubbleSize; i++) {
+            bubbleUpper = bubbleUpper + "人";
+        }
+
+        bubbleUpper = bubbleUpper + "人＿";
 
         return bubbleUpper;
     }
@@ -72,9 +107,15 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * @param contentByte
      * @return
      */
-    private String generateBubbleLower() {
+    private String generateBubbleLower(int bubbleSize) {
 
-        String bubbleLower = "¯Y^Y¯";
+        String bubbleLower = "￣";
+
+        for (int i = 0; i < bubbleSize; i++) {
+            bubbleLower = bubbleLower + "Y^";
+        }
+
+        bubbleLower = bubbleLower + "Y￣";
 
         return bubbleLower;
     }
@@ -84,16 +125,9 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * 
      * @return
      */
-    private String[] generateBubbleMiddle(String[] speakContents) {
+    private String generateBubbleMiddle(String speakSentence) {
 
-        // メッセージの行数
-        int lowNumber = speakContents.length;
-
-        String[] bubbleMiddle = new String[lowNumber];
-
-        for (int i = 0; i < lowNumber; i++) {
-            bubbleMiddle[i] = "> " + speakContents[i] + " <";
-        }
+        String bubbleMiddle = "＞　" + speakSentence + "　＜";
 
         return bubbleMiddle;
     }

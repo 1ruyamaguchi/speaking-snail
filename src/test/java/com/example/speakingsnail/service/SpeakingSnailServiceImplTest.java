@@ -39,11 +39,6 @@ public class SpeakingSnailServiceImplTest {
 
         // 返却値の設定
         OutputDto outputDto = new OutputDto();
-        List<String> bubbleSpeakContent = new ArrayList<>();
-        bubbleSpeakContent.add("a");
-        bubbleSpeakContent.add("b");
-        bubbleSpeakContent.add("c");
-        outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 
         // 入力値の設定
         InputDto inputDto = new InputDto();
@@ -61,9 +56,6 @@ public class SpeakingSnailServiceImplTest {
             fail();
         }
 
-        assertEquals(result.getBubbleSpeakContent().get(0), "a");
-        assertEquals(result.getBubbleSpeakContent().get(1), "b");
-        assertEquals(result.getBubbleSpeakContent().get(2), "c");
     }
 
     /**
@@ -76,10 +68,6 @@ public class SpeakingSnailServiceImplTest {
         // 返却値の設定
         OutputDto outputDto = new OutputDto();
         List<String> bubbleSpeakContent = new ArrayList<>();
-        bubbleSpeakContent.add("a");
-        bubbleSpeakContent.add("b");
-        bubbleSpeakContent.add("c");
-        outputDto.setBubbleSpeakContent(bubbleSpeakContent);
 
         // 入力値の設定
         InputDto inputDto = new InputDto();

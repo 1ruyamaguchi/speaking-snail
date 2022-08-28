@@ -1,7 +1,5 @@
 package com.example.speakingsnail.dto;
 
-import java.util.List;
-
 import lombok.Data;
 
 /**
@@ -12,6 +10,6 @@ import lombok.Data;
 public class OutputDto {
 
     /** しゃべる内容（吹き出し付き） */
-    private List<String> bubbleSpeakContent;
+    private String bubbleSpeakContent;
 
 }

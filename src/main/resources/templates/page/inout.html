@@ -23,13 +23,9 @@
         <input type="submit" value="送信" />
         <br><br><br>
         <!-- 吹き出し出力 -->
-        <table th:if="${outputDto} != null">
-            <tr th:each="speak : ${outputDto.bubbleSpeakContent}">
-                <td th:text="${speak}"></td>
-            </tr>
-            <tr>
-            </tr>
-        </table>
+        <p th:if="${outputDto} != null">
+            <span th:utext="${outputDto.bubbleSpeakContent}"></span>
+        </p>
         <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
     </form>
 </body>
