@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <title>しゃべるかたつむり</title>
 </head>
 
@@ -24,7 +25,11 @@
         <br><br><br>
         <!-- 吹き出し出力 -->
         <p th:if="${outputDto} != null">
-            <span th:utext="${outputDto.bubbleSpeakContent}"></span>
+            <span th:utext="${outputDto.bubbleSpeakUpper}"></span>
+            <br>
+            <span th:utext="${outputDto.bubbleSpeakSentence}"></span>
+            <br>
+            <span th:utext="${outputDto.bubbleSpeakLower}"></span>
         </p>
         <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
     </form>

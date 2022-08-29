@@ -27,59 +27,22 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         // 隠しコマンド処理
         speakSentence = this.resolveHiddenCommand(speakSentence);
 
-        // 返却値を生成
-        OutputDto outputDto = new OutputDto();
-        // しゃべる内容（吹き出し付き）の宣言
-        String bubbleSpeakContent = "";
-
-        // 吹き出しの大きさを計算
-        int bubbleSize = this.getBubbleSize(speakSentence);
+        int bubbleSize = speakSentence.length();
 
         // 吹き出しの上側を生成
-        bubbleSpeakContent = bubbleSpeakContent + this.generateBubbleUpper(bubbleSize);
+        String bubbleSpeakUpper = this.generateBubbleUpper(bubbleSize);
         // 吹き出しのセリフ部分を生成
-        bubbleSpeakContent = bubbleSpeakContent + "<br>" + this.generateBubbleMiddle(speakSentence);
+        String bubbleSpeakSentence = this.generateBubbleMiddle(speakSentence);
         // 吹き出しの下側を生成
-        bubbleSpeakContent = bubbleSpeakContent + "<br>" + this.generateBubbleLower(bubbleSize);
+        String bubbleSpeakLower = this.generateBubbleLower(bubbleSize);
 
-        outputDto.setBubbleSpeakContent(bubbleSpeakContent);
+        // 返却値を生成
+        OutputDto outputDto = new OutputDto();
+        outputDto.setBubbleSpeakUpper(bubbleSpeakUpper);
+        outputDto.setBubbleSpeakSentence(bubbleSpeakSentence);
+        outputDto.setBubbleSpeakLower(bubbleSpeakLower);
 
         return outputDto;
-    }
-
-    /**
-     * 吹き出しの大きさを計算する
-     * 
-     * @param speakSentence
-     * @return
-     */
-    private int getBubbleSize(String speakSentence) {
-
-        String[] speakSentenceChar = speakSentence.split("");
-
-        // 文字列のサイズ
-        int contentSize = 0;
-
-        // 1文字ごとに、全角ならサイズを2, 半角ならサイズを1として処理
-        for (String nowChar : speakSentenceChar) {
-            if (nowChar.getBytes().length > 1) {
-                contentSize = contentSize + 2;
-            } else {
-                contentSize++;
-            }
-        }
-
-        // 吹き出しのサイズ
-        int bubbleSize = 0;
-
-        // 文字列のサイズの半分を吹き出しのサイズとする 割り切れなければ切り上げ
-        if (contentSize % 2 != 0) {
-            bubbleSize = (contentSize + 1) / 2;
-        } else {
-            bubbleSize = contentSize / 2;
-        }
-
-        return bubbleSize;
     }
 
     /**
@@ -102,20 +65,20 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
     }
 
     /**
-     * 吹き出しの下側を生成する
+     * 吹き出しの下側を生成する アプリ側で生成する文字列は上側と同じ 画面側で反転して制御する
      * 
      * @param contentByte
      * @return
      */
     private String generateBubbleLower(int bubbleSize) {
 
-        String bubbleLower = "￣";
+        String bubbleLower = "＿人";
 
         for (int i = 0; i < bubbleSize; i++) {
-            bubbleLower = bubbleLower + "Y^";
+            bubbleLower = bubbleLower + "人";
         }
 
-        bubbleLower = bubbleLower + "Y￣";
+        bubbleLower = bubbleLower + "人＿";
 
         return bubbleLower;
     }

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/* X軸(水平方向の軸)を基準にして180度回転 */
+.rotateX180 {
+    /* インラインブロック化 */
+    display: inline-block;
+    transform: rotateX(180deg);
+
+    /* Firefox用 */
+    -moz-transform: rotateX(180deg);
+
+    /* Chrome,Safari,新しいOpera用 */
+    -webkit-transform: rotateX(180deg);
+
+    /* 古いOpera用 */
+    -o-transform: rotateX(180deg);
+
+    /* IE9用 */
+    -ms-transform: rotateX(180deg);
+}
