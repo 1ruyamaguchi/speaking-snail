@@ -28,7 +28,7 @@ public class SpeakingSnailLogicImplTest {
     public void testCallSnail() {
 
         InputDto inputDto = new InputDto();
-        inputDto.setSpeakContent("ジャスティス");
+        inputDto.setSpeakContent("テスト");
         OutputDto result = new OutputDto();
 
         try {
@@ -38,6 +38,9 @@ public class SpeakingSnailLogicImplTest {
             fail();
         }
 
+        assertEquals("＿人人人人人＿", result.getBubbleSpeakUpper());
+        assertEquals("＞　テスト　＜", result.getBubbleSpeakSentence());
+        assertEquals("＿人人人人人＿", result.getBubbleSpeakLower());
     }
 
     /**
