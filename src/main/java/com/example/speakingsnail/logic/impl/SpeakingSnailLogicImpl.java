@@ -1,8 +1,5 @@
 package com.example.speakingsnail.logic.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.example.speakingsnail.dto.InputDto;
@@ -30,25 +27,20 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         // 隠しコマンド処理
         speakSentence = this.resolveHiddenCommand(speakSentence);
 
-        // 入力された文字を1文字ずつに分割
-        String[] speakContents = speakSentence.split("");
+        int bubbleSize = speakSentence.length();
+
+        // 吹き出しの上側を生成
+        String bubbleSpeakUpper = this.generateBubbleUpper(bubbleSize);
+        // 吹き出しのセリフ部分を生成
+        String bubbleSpeakSentence = this.generateBubbleMiddle(speakSentence);
+        // 吹き出しの下側を生成
+        String bubbleSpeakLower = this.generateBubbleLower(bubbleSize);
 
         // 返却値を生成
         OutputDto outputDto = new OutputDto();
-        // しゃべる内容（吹き出し付き）を格納する
-        List<String> bubbleSpeakContent = new ArrayList<>();
-
-        // 吹き出しの上側を生成
-        bubbleSpeakContent.add(this.generateBubbleUpper());
-        // 吹き出しのセリフ部分を生成
-        String[] bubbleMiddle = this.generateBubbleMiddle(speakContents);
-        for (int i = 1; i <= speakContents.length; i++) {
-            bubbleSpeakContent.add(bubbleMiddle[i - 1]);
-        }
-        // 吹き出しの下側を生成
-        bubbleSpeakContent.add(this.generateBubbleLower());
-
-        outputDto.setBubbleSpeakContent(bubbleSpeakContent);
+        outputDto.setBubbleSpeakUpper(bubbleSpeakUpper);
+        outputDto.setBubbleSpeakSentence(bubbleSpeakSentence);
+        outputDto.setBubbleSpeakLower(bubbleSpeakLower);
 
         return outputDto;
     }
@@ -59,22 +51,34 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * @param contentByte
      * @return
      */
-    private String generateBubbleUpper() {
+    private String generateBubbleUpper(int bubbleSize) {
 
-        String bubbleUpper = "_人人_";
+        String bubbleUpper = "＿人";
+
+        for (int i = 0; i < bubbleSize; i++) {
+            bubbleUpper = bubbleUpper + "人";
+        }
+
+        bubbleUpper = bubbleUpper + "人＿";
 
         return bubbleUpper;
     }
 
     /**
-     * 吹き出しの下側を生成する
+     * 吹き出しの下側を生成する アプリ側で生成する文字列は上側と同じ 画面側で反転して制御する
      * 
      * @param contentByte
      * @return
      */
-    private String generateBubbleLower() {
+    private String generateBubbleLower(int bubbleSize) {
 
-        String bubbleLower = "¯Y^Y¯";
+        String bubbleLower = "＿人";
+
+        for (int i = 0; i < bubbleSize; i++) {
+            bubbleLower = bubbleLower + "人";
+        }
+
+        bubbleLower = bubbleLower + "人＿";
 
         return bubbleLower;
     }
@@ -84,16 +88,9 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * 
      * @return
      */
-    private String[] generateBubbleMiddle(String[] speakContents) {
+    private String generateBubbleMiddle(String speakSentence) {
 
-        // メッセージの行数
-        int lowNumber = speakContents.length;
-
-        String[] bubbleMiddle = new String[lowNumber];
-
-        for (int i = 0; i < lowNumber; i++) {
-            bubbleMiddle[i] = "> " + speakContents[i] + " <";
-        }
+        String bubbleMiddle = "＞　" + speakSentence + "　＜";
 
         return bubbleMiddle;
     }
