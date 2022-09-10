@@ -4,7 +4,7 @@
 JAVA_IMAGE_NAME="speaking-snail"
 
 # jarファイルをコピー
-cp ../../target/speakingsnail-0.0.1-SNAPSHOT.jar ./java/jar
+# cp ../../target/speakingsnail-0.0.1-SNAPSHOT.jar ./java/jar
 
 # イメージをビルド
 docker build -t ${JAVA_IMAGE_NAME} ./java
