@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.speakingsnail.constants.UrlConst;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
 
@@ -14,7 +15,7 @@ import com.example.speakingsnail.dto.OutputDto;
  */
 @Service
 @RestController
-@RequestMapping(value = "/v1/api/snail")
+@RequestMapping(value = UrlConst.BASE_API)
 public interface SpeakingSnailService {
 
     /**
@@ -24,7 +25,7 @@ public interface SpeakingSnailService {
      * @param outputDto
      * @return
      */
-    @PostMapping(value = "/call")
+    @PostMapping(value = UrlConst.CALL)
     OutputDto callSnail(InputDto inputDto);
 
 }

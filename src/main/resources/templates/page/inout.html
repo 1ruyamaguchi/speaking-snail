@@ -25,11 +25,13 @@
         <br>
         <!-- 吹き出し出力 -->
         <p th:if="${outputDto} != null">
-            <span th:utext="${outputDto.bubbleSpeakUpper}"></span>
-            <br>
-            <span th:utext="${outputDto.bubbleSpeakSentence}"></span>
-            <br>
-            <span class="rotateX180" th:utext="${outputDto.bubbleSpeakLower}"></span>
+            <font size="7">
+                <span th:utext="${outputDto.bubbleSpeakUpper}"></span>
+                <br>
+                <span th:utext="${outputDto.bubbleSpeakSentence}"></span>
+                <br>
+                <span class="rotateX180" th:utext="${outputDto.bubbleSpeakLower}"></span>
+            </font>
         </p>
         <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
     </form>

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.speakingsnail.constants.UrlConst;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
 import com.example.speakingsnail.service.SpeakingSnailService;
@@ -15,7 +16,7 @@ import com.example.speakingsnail.service.SpeakingSnailService;
  * 
  */
 @Controller
-@RequestMapping(value = "/speaking-snail")
+@RequestMapping(value = UrlConst.BASE_CLI)
 public class SpeakingSnailController {
 
     @Autowired
@@ -31,7 +32,7 @@ public class SpeakingSnailController {
      * 
      * @return
      */
-    @RequestMapping(value = "/input")
+    @RequestMapping(value = UrlConst.INPUT)
     public String welcome() {
 
         return "page/inout";
@@ -44,7 +45,7 @@ public class SpeakingSnailController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/output")
+    @RequestMapping(value = UrlConst.OUTPUT)
     public String output(InputDto inputDto, Model model) {
 
         // サービス呼び出し
