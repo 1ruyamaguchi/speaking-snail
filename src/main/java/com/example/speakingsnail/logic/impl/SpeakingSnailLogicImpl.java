@@ -33,7 +33,7 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         speakSentence = this.resolveHiddenCommand(speakSentence);
 
         // モード別処理
-        log.info("The mode is " + SpeakMode.getSpeakModeCodeMap().get(inputDto.getSpeakMode()));
+        log.info("The mode code is " + inputDto.getSpeakMode());
         if (!inputDto.getSpeakMode().equals(SpeakMode.NORMAL.getSpeakModeCode())) {
             speakSentence = this.modeProcess(speakSentence, inputDto.getSpeakMode());
         }
