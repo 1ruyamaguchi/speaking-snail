@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.speakingsnail.constants.UrlConst;
+import com.example.speakingsnail.dto.ChangeSpeakModeDto;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
 
@@ -28,4 +29,11 @@ public interface SpeakingSnailService {
     @PostMapping(value = UrlConst.CALL)
     OutputDto callSnail(InputDto inputDto);
 
+    /**
+     * おしゃべりモードを切り替えるメソッド
+     * 
+     * @param changeSpeakModeDto
+     */
+    @PostMapping(value = UrlConst.MODE_CHANGE)
+    String changeSpeakMode(ChangeSpeakModeDto changeSpeakModeDto);
 }

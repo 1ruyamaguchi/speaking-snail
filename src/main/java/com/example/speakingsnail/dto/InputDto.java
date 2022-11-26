@@ -12,4 +12,7 @@ public class InputDto {
     /** しゃべる内容 */
     private String speakContent;
 
+    /** おしゃべりモード */
+    private String speakMode;
+
 }
