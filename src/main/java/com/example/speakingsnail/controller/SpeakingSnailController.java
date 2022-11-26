@@ -1,5 +1,7 @@
 package com.example.speakingsnail.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.speakingsnail.constants.UrlConst;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
+import com.example.speakingsnail.enums.SpeakMode;
 import com.example.speakingsnail.service.SpeakingSnailService;
 
 /**
@@ -33,7 +36,10 @@ public class SpeakingSnailController {
      * @return
      */
     @RequestMapping(value = UrlConst.INPUT)
-    public String welcome() {
+    public String welcome(HttpSession session) {
+
+        // 初期はおしゃべりモード: 通常
+        session.setAttribute("speakMode", SpeakMode.NORMAL.getModeCode());
 
         return "page/inout";
     }
@@ -46,8 +52,10 @@ public class SpeakingSnailController {
      * @return
      */
     @RequestMapping(value = UrlConst.OUTPUT)
-    public String output(InputDto inputDto, Model model) {
+    public String output(InputDto inputDto, Model model, HttpSession session) {
 
+        // おしゃべりモードをセッションから取得してリクエストにセット
+        inputDto.setSpeakMode((String) session.getAttribute("speakMode"));
         // サービス呼び出し
         OutputDto outputDto = speakingSnailService.callSnail(inputDto);
         // 返却値をモデルに格納

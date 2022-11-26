@@ -3,6 +3,7 @@ package com.example.speakingsnail.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.speakingsnail.dto.ChangeSpeakModeDto;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
 import com.example.speakingsnail.logic.SpeakingSnailLogic;
@@ -34,6 +35,16 @@ public class SpeakingSnailServiceImpl implements SpeakingSnailService {
         OutputDto outputDto = speakingSnailLogic.callSnail(inputDto);
 
         return outputDto;
+    }
+
+    /**
+     * {@inheritDoc}
+     * 
+     */
+    @Override
+    public String changeSpeakMode(ChangeSpeakModeDto changeSpeakModeDto) {
+
+        return changeSpeakModeDto.getModeCode();
     }
 
 }

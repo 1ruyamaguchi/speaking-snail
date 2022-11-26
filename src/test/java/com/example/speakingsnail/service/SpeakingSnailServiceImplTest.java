@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.example.speakingsnail.dto.ChangeSpeakModeDto;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
+import com.example.speakingsnail.enums.SpeakMode;
 import com.example.speakingsnail.logic.SpeakingSnailLogic;
 
 /**
@@ -87,4 +89,25 @@ public class SpeakingSnailServiceImplTest {
         assertEquals(inputDto.getSpeakContent(), "なんか書いてよ！");
     }
 
+    /**
+     * changeSpeakModeのテスト 正常系
+     * 
+     */
+    @Test
+    public void testChangeSpeakMode_success() {
+
+        ChangeSpeakModeDto changeSpeakModeDto = new ChangeSpeakModeDto();
+        changeSpeakModeDto.setModeCode(SpeakMode.GAL.getModeCode());
+
+        String result = "";
+
+        try {
+            result = speakingSnailService.changeSpeakMode(changeSpeakModeDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        assertEquals("2", result);
+    }
 }

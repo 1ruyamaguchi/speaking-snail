@@ -14,6 +14,9 @@ public class UrlConst {
     // しゃべるかたつむり呼び出しAPI
     public final static String CALL = "/call";
 
+    // おしゃべりモード切り替えAPI
+    public final static String MODE_CHANGE = "/mode-change";
+
     /** 画面のURL */
 
     // 画面のベースURL
