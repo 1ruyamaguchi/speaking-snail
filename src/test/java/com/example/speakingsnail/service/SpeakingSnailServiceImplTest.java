@@ -97,7 +97,7 @@ public class SpeakingSnailServiceImplTest {
     public void testChangeSpeakMode_success() {
 
         ChangeSpeakModeDto changeSpeakModeDto = new ChangeSpeakModeDto();
-        changeSpeakModeDto.setModeCode(SpeakMode.GAL.getModeCode());
+        changeSpeakModeDto.setModeCode(SpeakMode.GAL.getSpeakModeCode());
 
         String result = "";
 

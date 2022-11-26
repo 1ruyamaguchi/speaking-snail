@@ -40,8 +40,10 @@ public class SpeakingSnailController {
     public String welcome(HttpSession session, Model model) {
 
         // 初期はおしゃべりモード: 通常
-        session.setAttribute("speakMode", SpeakMode.NORMAL.getModeCode());
-        model.addAttribute("speakMode", session.getAttribute("speakMode"));
+        String speakModeCode = SpeakMode.NORMAL.getSpeakModeCode();
+        session.setAttribute("speakModeCode", speakModeCode);
+        // 画面表示用のモード名称を取得
+        this.setModeCodeToSession(speakModeCode, session, model);
 
         return "page/inout";
     }
@@ -57,12 +59,16 @@ public class SpeakingSnailController {
     public String output(InputDto inputDto, Model model, HttpSession session) {
 
         // おしゃべりモードをセッションから取得してリクエストにセット
-        inputDto.setSpeakMode((String) session.getAttribute("speakMode"));
+        String speakModeCode = (String) session.getAttribute("speakModeCode");
+        inputDto.setSpeakMode(speakModeCode);
         // サービス呼び出し
         OutputDto outputDto = speakingSnailService.callSnail(inputDto);
         // 返却値をモデルに格納
         model.addAttribute("outputDto", outputDto);
-        model.addAttribute("speakMode", session.getAttribute("speakMode"));
+        model.addAttribute("speakModeCode", session.getAttribute("speakModeCode"));
+
+        // セッションにモード情報をセット
+        this.setModeCodeToSession(speakModeCode, session, model);
 
         return "page/inout";
     }
@@ -77,14 +83,27 @@ public class SpeakingSnailController {
 
         // モード変更のリクエストを作成
         ChangeSpeakModeDto changeSpeakModeDto = new ChangeSpeakModeDto();
-        changeSpeakModeDto.setModeCode((String) session.getAttribute("speakMode"));
+        changeSpeakModeDto.setModeCode((String) session.getAttribute("speakModeCode"));
 
         // サービス呼び出し
-        String speakMode = speakingSnailService.changeSpeakMode(changeSpeakModeDto);
+        String speakModeCode = speakingSnailService.changeSpeakMode(changeSpeakModeDto);
 
-        session.setAttribute("speakMode", speakMode);
-        model.addAttribute("speakMode", speakMode);
+        // セッションにモード情報をセット
+        this.setModeCodeToSession(speakModeCode, session, model);
+
         return "page/inout";
+    }
+
+    /**
+     * セッションにおしゃべりモードのコード値をセットし、画面用にモード名称をモデルに格納する
+     * 
+     * @param speakModeCode
+     */
+    private void setModeCodeToSession(String speakModeCode, HttpSession session, Model model) {
+
+        String displaySpeakMode = SpeakMode.getSpeakModeCodeMap().get(speakModeCode);
+        session.setAttribute("speakModeCode", speakModeCode);
+        model.addAttribute("displaySpeakMode", displaySpeakMode);
     }
 
 }
