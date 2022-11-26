@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
+import com.example.speakingsnail.enums.SpeakMode;
 
 /**
  * SpeakingSnailLogicImplのテストクラス
@@ -29,6 +30,7 @@ public class SpeakingSnailLogicImplTest {
 
         InputDto inputDto = new InputDto();
         inputDto.setSpeakContent("テスト");
+        inputDto.setSpeakMode(SpeakMode.NORMAL.getSpeakModeCode());
         OutputDto result = new OutputDto();
 
         try {
