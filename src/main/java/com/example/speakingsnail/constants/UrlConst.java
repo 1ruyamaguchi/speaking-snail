@@ -22,10 +22,13 @@ public class UrlConst {
     // 画面のベースURL
     public final static String BASE_CLI = "/speaking-snail";
 
-    // 入力画面
+    // 初期画面
     public final static String INPUT = "/input";
 
     // 出力画面
     public final static String OUTPUT = "/output";
+
+    // モード変更
+    public final static String MODE = "/mode";
 
 }

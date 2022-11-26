@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.speakingsnail.constants.UrlConst;
+import com.example.speakingsnail.dto.ChangeSpeakModeDto;
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
 import com.example.speakingsnail.enums.SpeakMode;
@@ -31,15 +32,16 @@ public class SpeakingSnailController {
     }
 
     /**
-     * 入力画面
+     * 初期画面
      * 
      * @return
      */
     @RequestMapping(value = UrlConst.INPUT)
-    public String welcome(HttpSession session) {
+    public String welcome(HttpSession session, Model model) {
 
         // 初期はおしゃべりモード: 通常
         session.setAttribute("speakMode", SpeakMode.NORMAL.getModeCode());
+        model.addAttribute("speakMode", session.getAttribute("speakMode"));
 
         return "page/inout";
     }
@@ -60,7 +62,28 @@ public class SpeakingSnailController {
         OutputDto outputDto = speakingSnailService.callSnail(inputDto);
         // 返却値をモデルに格納
         model.addAttribute("outputDto", outputDto);
+        model.addAttribute("speakMode", session.getAttribute("speakMode"));
 
+        return "page/inout";
+    }
+
+    /**
+     * モード変更
+     * 
+     * @return
+     */
+    @RequestMapping(value = UrlConst.MODE)
+    public String mode(HttpSession session, Model model) {
+
+        // モード変更のリクエストを作成
+        ChangeSpeakModeDto changeSpeakModeDto = new ChangeSpeakModeDto();
+        changeSpeakModeDto.setModeCode((String) session.getAttribute("speakMode"));
+
+        // サービス呼び出し
+        String speakMode = speakingSnailService.changeSpeakMode(changeSpeakModeDto);
+
+        session.setAttribute("speakMode", speakMode);
+        model.addAttribute("speakMode", speakMode);
         return "page/inout";
     }
 

@@ -43,8 +43,18 @@ public class SpeakingSnailServiceImpl implements SpeakingSnailService {
      */
     @Override
     public String changeSpeakMode(ChangeSpeakModeDto changeSpeakModeDto) {
+        // 現状モードが2種類しかないため暫定の実装・・・
 
-        return changeSpeakModeDto.getModeCode();
+        // 返却値を定義
+        String nextSpeakMode = "";
+
+        if (changeSpeakModeDto.getModeCode().equals("1")) {
+            nextSpeakMode = "2";
+        } else {
+            nextSpeakMode = "1";
+        }
+
+        return nextSpeakMode;
     }
 
 }

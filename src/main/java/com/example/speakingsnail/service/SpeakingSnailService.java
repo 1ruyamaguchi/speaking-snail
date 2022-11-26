@@ -1,7 +1,6 @@
 package com.example.speakingsnail.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +34,6 @@ public interface SpeakingSnailService {
      * 
      * @param changeSpeakModeDto
      */
-    @GetMapping(value = UrlConst.MODE_CHANGE)
+    @PostMapping(value = UrlConst.MODE_CHANGE)
     String changeSpeakMode(ChangeSpeakModeDto changeSpeakModeDto);
 }

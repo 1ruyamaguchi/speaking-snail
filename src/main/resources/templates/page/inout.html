@@ -35,6 +35,11 @@
         </p>
         <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
     </form>
+
+    <form th:action="@{/speaking-snail/mode}" method="get">
+        <span th:text="${speakMode}"></span>
+        <input type="submit" value="モード変更" />
+    </form>
 </body>
 
 </html>
