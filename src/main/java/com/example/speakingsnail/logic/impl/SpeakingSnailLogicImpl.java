@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.speakingsnail.dto.InputDto;
 import com.example.speakingsnail.dto.OutputDto;
+import com.example.speakingsnail.enums.GalChar;
 import com.example.speakingsnail.enums.HiddenCommand;
 import com.example.speakingsnail.enums.SpeakMode;
 import com.example.speakingsnail.logic.SpeakingSnailLogic;
@@ -106,17 +107,17 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      * 
      */
     @Override
-    public String resolveHiddenCommand(String speakContent) {
+    public String resolveHiddenCommand(String speakSentence) {
 
         // enumから隠しコマンドを全件取得
         HiddenCommand[] hiddenCommands = HiddenCommand.values();
 
         // 入力値に各コマンドが含まれていれば差し替える
         for (HiddenCommand hiddenCommand : hiddenCommands) {
-            speakContent = speakContent.replace(hiddenCommand.getBefore(), hiddenCommand.getAfter());
+            speakSentence = speakSentence.replace(hiddenCommand.getBefore(), hiddenCommand.getAfter());
         }
 
-        return speakContent;
+        return speakSentence;
     }
 
     /**
@@ -144,8 +145,13 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
      */
     private String galMode(String speakSentence) {
 
-        // TODO ちゃんと実装する
-        speakSentence = "ギャルモードです";
+        // enumから全件取得
+        GalChar[] galChars = GalChar.values();
+
+        // 入力値をギャル文字に差し替える
+        for (GalChar galChar : galChars) {
+            speakSentence = speakSentence.replace(galChar.getNormalChar(), galChar.getGalGhar());
+        }
 
         return speakSentence;
     }
