@@ -9,11 +9,14 @@ import com.example.speakingsnail.enums.HiddenCommand;
 import com.example.speakingsnail.enums.SpeakMode;
 import com.example.speakingsnail.logic.SpeakingSnailLogic;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * しゃべるかたつむりロジックの実装 縦書きで吹き出し付きのセリフを返す
  * 
  */
 @Component
+@Slf4j
 public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
 
     /**
@@ -30,6 +33,7 @@ public class SpeakingSnailLogicImpl implements SpeakingSnailLogic {
         speakSentence = this.resolveHiddenCommand(speakSentence);
 
         // モード別処理
+        log.info("The mode is " + SpeakMode.getSpeakModeCodeMap().get(inputDto.getSpeakMode()));
         if (!inputDto.getSpeakMode().equals(SpeakMode.NORMAL.getSpeakModeCode())) {
             speakSentence = this.modeProcess(speakSentence, inputDto.getSpeakMode());
         }
