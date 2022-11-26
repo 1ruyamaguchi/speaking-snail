@@ -1,7 +1,7 @@
 FROM openjdk:17
 
 # イメージビルド用の環境変数
-ARG jarFile="speakingsnail-1.0.2-SNAPSHOT.jar"
+ARG jarFile="speakingsnail-1.0.4-SNAPSHOT.jar"
 ARG jarFilePath="/nob/server/jar"
 # コンテナ内で使う環境変数
 ENV JAR_FILE=${jarFile}
