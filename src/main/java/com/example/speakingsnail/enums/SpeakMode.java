@@ -9,8 +9,13 @@ import java.util.Map;
  */
 public enum SpeakMode {
 
-    NORMAL("1", "通常モード"),
-    GAL("2", "ギャルモード");
+    NORMAL(CodeConstants.NORMAL_CODE, "通常モード"),
+    GAL(CodeConstants.GAL_CODE, "ギャルモード");
+
+    public static class CodeConstants {
+        public static final String NORMAL_CODE = "1";
+        public static final String GAL_CODE = "2";
+    }
 
     private final String speakModeCode;
     private final String displaySpeakMode;
