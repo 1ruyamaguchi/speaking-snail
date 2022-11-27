@@ -103,6 +103,7 @@ public class SpeakingSnailController {
 
         String displaySpeakMode = SpeakMode.getSpeakModeCodeMap().get(speakModeCode);
         session.setAttribute("speakModeCode", speakModeCode);
+        model.addAttribute("speakModeCode", speakModeCode);
         model.addAttribute("displaySpeakMode", displaySpeakMode);
     }
 

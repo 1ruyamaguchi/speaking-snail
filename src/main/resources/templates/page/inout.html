@@ -33,7 +33,13 @@
                 <span class="rotateX180" th:utext="${outputDto.bubbleSpeakLower}"></span>
             </font>
         </p>
-        <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
+        <!-- カタツムリの画像出力 モードによって画像を変える-->
+        <p th:if="${speakModeCode} == 1">
+            <img th:src="@{/image/snail.jpg}" alt="snail" width="250" height="130">
+        </p>
+        <p th:if="${speakModeCode} == 2">
+            <img th:src="@{/image/snail_gal.jpg}" alt="snail" width="250" height="130">
+        </p>
     </form>
 
     <form th:action="@{/speaking-snail/mode}" method="get">
