@@ -13,6 +13,7 @@ public class InputDto {
     private String speakContent;
 
     /** おしゃべりモード */
+    // TODO バリデーション実装
     private String speakMode;
 
 }
