@@ -85,7 +85,7 @@ public class SpeakingSnailController {
         ChangeSpeakModeDto changeSpeakModeDto = new ChangeSpeakModeDto();
         changeSpeakModeDto.setModeCode((String) session.getAttribute("speakModeCode"));
 
-        // サービス呼び出し
+        // サービスの呼び出し
         String speakModeCode = speakingSnailService.changeSpeakMode(changeSpeakModeDto);
 
         // セッションにモード情報をセット
