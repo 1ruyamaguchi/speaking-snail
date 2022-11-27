@@ -30,7 +30,7 @@ public interface SpeakingSnailService {
     OutputDto callSnail(InputDto inputDto);
 
     /**
-     * おしゃべりモードを切り替えるメソッド
+     * おしゃべりモードの切り替えメソッド
      * 
      * @param changeSpeakModeDto
      */
